@@ -1,3 +1,6 @@
 [submodule "brevitas"]
 	path = brevitas
 	url = https://github.com/Xilinx/brevitas.git
+[submodule "warp-ctc"]
+	path = warp-ctc
+	url = https://github.com/SeanNaren/warp-ctc
