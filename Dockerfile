@@ -18,7 +18,7 @@ FROM pytorch/pytorch:0.4.1-cuda9-cudnn7-runtime
 WORKDIR /workspace/ocr_req
 
 COPY requirements.txt /workspace/ocr_req
-COPY brevitas_branch_fork /pytorch-quantization
+COPY brevitas /pytorch-quantization
 COPY warp-ctc /warp-ctc
 
 RUN ls /usr/local/
