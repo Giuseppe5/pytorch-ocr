@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM pytorch/pytorch:0.4.1-cuda9-cudnn7-runtime
+FROM pytorch/pytorch:nightly-devel-cuda9.2-cudnn7
 
 #RUN apt-get update && apt-get install -y libsndfile1 && apt-get install -y sox && rm -rf /var/lib/apt/lists/*
 WORKDIR /workspace/ocr_req
@@ -20,13 +20,11 @@ WORKDIR /workspace/ocr_req
 COPY requirements.txt /workspace/ocr_req
 COPY brevitas /pytorch-quantization
 COPY warp-ctc /warp-ctc
-
-RUN ls /usr/local/
-ENV CUDA_BIN_PATH=/usr/local/cuda-9
-
+RUN conda install pytorch==0.3.1 -c pytorch
 RUN pip install --disable-pip-version-check -U -r /workspace/ocr_req/requirements.txt
 RUN conda install cmake
 RUN cd /pytorch-quantization && python build.py . && cd ..
 RUN cd /warp-ctc && mkdir /warp-ctc/build && cd /warp-ctc/build && cmake .. && make
+
 
 ENV PYTHONPATH "${PYTHONPATH}:/pytorch-quantization"
